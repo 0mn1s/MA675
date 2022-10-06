@@ -1,12 +1,14 @@
 ---
 title: "In Class EDA Activity"
-author: "Your Name"
+author: "Jing Xu"
 date: '2022-10-04'
 output: pdf_document
 ---
 
 ```{r, echo=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
 ```
 
 ## Read data
@@ -36,12 +38,44 @@ Here are the description of the variables included:
 ## Clean Data
 
 ```{r}
+RawData$male <- 0
+RawData$g_college <- 0
+RawData$master <- 0
+RawData$avegpa <- 0
+RawData$salary_lg <- 0
+g <- mean(RawData$collegeGPA)
+for (i in RawData$X){
+  if (RawData$Gender[i] =="m")
+    RawData$male[i] <- 1
+  if (RawData$CollegeTier[i] ==1)
+    RawData$g_college[i] <- 1
+  if (RawData$Degree[i] == "MCA")
+    RawData$master[i] <- 1
+  RawData$avegpa[i] <- RawData$collegeGPA[i] - g
+  RawData$salary_lg[i] <- log(RawData$Salary[i])
+}
 
 ```
 
 ## EDA
 
-```{r}
 
+```{r}
+fit_1 <- lm(salary_lg ~ g_college + avegpa, data = RawData)
+summary(fit_1)
+c <- coef(fit_1)
+ggplot(RawData,aes(avegpa,salary_lg))+
+  geom_point(data=RawData %>% filter(g_college==0), col = "red")+
+  geom_point(data=RawData %>% filter(g_college==1), col = "blue"
+             ) 
+color <- ifelse(RawData$g_college==0,"red", "blue")
+plot(RawData$avegpa,RawData$salary_lg,pch=20, col = color, xlab = 'average gpa', ylab = 'log salary')
+abline(c[1], c[3],col="magenta")
+abline(c[1] + c[2], c[3],col="turquoise")
+
+#people who get their master degree is averagely earning .38% higher salary comparing to those who didn't
+#1 point higher aggregate GPA at one's graduation is averagely associated with a increase of .011 percent in salary
+            
+  
 ```
 
