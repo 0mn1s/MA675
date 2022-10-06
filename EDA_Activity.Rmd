@@ -1,0 +1,47 @@
+---
+title: "In Class EDA Activity"
+author: "Your Name"
+date: '2022-10-04'
+output: pdf_document
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Read data
+
+The data is how much graduate students with engineering degree earn.  We will talk about the origin of the data after your submission.
+
+```{r}
+RawData<- read.csv("Engineering_graduate_salary_Simple.csv")
+```
+
+Here are the description of the variables included:
+
+- ID: A unique ID to identify a candidate
+- Salary: Annual CTC offered to the candidate (in INR)
+- Gender: Candidate's gender
+- DOB: Date of birth of the candidate
+- CollegeID: Unique ID identifying the university/college which the candidate attended for her/his undergraduate
+- CollegeTier: Each college has been annotated as 1 or 2. The annotations have been computed from the average AMCAT scores obtained by the students in the college/university. Colleges with an average score above a threshold are tagged as 1 and others as 2.
+- Degree: Degree obtained/pursued by the candidate
+- Specialization: Specialization pursued by the candidate
+- CollegeGPA: Aggregate GPA at graduation
+- CollegeCityID: A unique ID to identify the city in which the college is located in.
+- CollegeCityTier: The tier of the city in which the college is located in. This is annotated based on - the population of the cities.
+- CollegeState: Name of the state in which the college is located
+- GraduationYear: Year of graduation (Bachelor's degree)
+
+## Clean Data
+
+```{r}
+
+```
+
+## EDA
+
+```{r}
+
+```
+
